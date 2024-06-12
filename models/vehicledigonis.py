@@ -9,6 +9,8 @@ class VehicleDigonis(models.Model):
     # vehicle = fields.One2many(related="name.cars", string='vehicle')
     vehicle_brand = fields.Many2one(related="name.company_id", string="vehicle brand name")
     vehicle_model = fields.Many2one(related="name.vehicle_model_id", string='vehicle brand name')
+    color = fields.Integer("color")
+
 
 #     Create another model and add a many2many field for this model in the existing
 # model but give the table user defined name. Also give user defined name for the
@@ -132,13 +134,19 @@ class Customer_Parts(models.Model):
     def verify_update(self):
         for stock in self:
             stock.parts_id.qty -= stock.qty
-        print("________________", stock.parts_id.qty)
+            print("______**********__________", stock.parts_id.qty)
         # for x in parts_stock_qty:
         #     print("********************",x.)
         # # for gp in parts_stock_qty:
         # #     print("--------------------------",gp.qty)
         # # # for stock in self:
         # # #     update_qty = parts_stock_qty.qty - stock.qty
+
+
+    @api.model_create_multi
+    def create(self,vals_lst):
+        self.verify_update()
+        return super().create(vals_lst)
 
 
 

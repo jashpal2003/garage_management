@@ -10,6 +10,7 @@
                         <field name="name"/>
                         <field name ="service_price"/>
                         <field name = "time_consume"/>
+                        <field name ="color" widget = "color_picker"/>
                     </group>
                 </sheet>
             </form>

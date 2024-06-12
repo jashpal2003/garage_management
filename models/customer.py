@@ -41,6 +41,9 @@ class Customer(models.Model):
 
     sign_in = fields.Float('Sign in')
     priority = fields.Selection([(str(ele) , str(ele) )for ele in range(6)],'Priority')
+    vehicle_entry = fields.Datetime("Vehicle entry")
+    vehicle_exit = fields.Datetime("Vehicle exit")
+
 
     #vehicle_id = fields.Many2one('garage.vehicle','Vehicle',ondelete = 'restrict',domain = [('name','like','%it%')])
    # service_id = fields.Many2Many('garage.service','','','Services')
@@ -78,6 +81,7 @@ name should be allowed to select."""
     # company_id =fields.Many2one('garage.brand','vehivle brand',domain="[('company_id','like','it')]")
     # company_id = fields.Many2one('garage.brand', string='Company',domain="[('name','like','it')]")
     company_id = fields.Many2one('garage.brand', string='Company')
+
 #     If a record is selected in a many2one field, it should not be possible to delete the
 # record from the model of many2one
 
@@ -96,7 +100,7 @@ name should be allowed to select."""
 
 
 
-    color = fields.Char(string= "Color of vehicle")
+    color = fields.Integer(string= "Color of vehicle")
     model_year = fields.Char(string = "Model Year")
     vehicle_type = fields.Selection(selection = [('2 wheeler','2 wheeler'),
                                             ('3 wheeler','3 wheeler'),('4 wheeler','4 wheeler'),],string = 'Vehicle Type')
@@ -274,7 +278,7 @@ name should be allowed to select."""
         if vals.get('reg_no',_('New')) == _('New'):
             vals['reg_no'] =self.env['ir.sequence'].next_by_code('garage.customer.sequence') or _('New')
         if vals.get('name'):
-            vals['customer_code'] = vals['name'][:3].upper()
+            vals['customer_code'] = vals['name'][:5].upper()
 
         result = super().create(vals)
         return result
@@ -322,7 +326,7 @@ name should be allowed to select."""
 
     def write(self,vals):
         if vals.get('name'):
-            vals['customer_code'] = vals['name'][:7].upper()
+            vals['customer_code'] = vals['name'][:5].upper()
 
         return super().write(vals)
 
@@ -387,14 +391,14 @@ name should be allowed to select."""
 
 
     #22. Add an object constraint to make sure that the length of a character field is
-# exactly 4 characters.
-    @api.constrains('customer_code')
-    def check_customer_code(self):
-        for customer in self:
-            r = customer.customer_code
-            if len(r) != 4:
-                raise ValidationError(' kya re gunda banega tu hamara  code 4 digit ka  hai')
-            print(r)
+# # exactly 4 characters.
+#     @api.constrains('customer_code')
+#     def check_customer_code(self):
+#         for customer in self:
+#             r = customer.customer_code
+#             if len(r) != 4:
+#                 raise ValidationError(' kya re gunda banega tu hamara  code 4 digit ka  hai')
+#             print(r)
 
     # 1. Override create method to create a record in another model.
     # @api.model

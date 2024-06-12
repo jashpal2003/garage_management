@@ -10,4 +10,5 @@ class Services(models.Model):
 
     service_price = fields.Float("Price Of Service")
     time_consume = fields.Float('Time Consume by Service')
+    color = fields.Integer("color")
 

@@ -4,6 +4,9 @@
         <field name="name">view.parts.form</field>
         <field name="model">garage.parts</field>
         <field name= "arch" type = "xml">
+<!--            11. Create a form view such that it is a readonly view which means you can not-->
+<!--create update or delete any records.-->
+<!--            <form create="0" edit="0" delete="0">-->
             <form>
 <!--                <button name="create_rec" string="Create" type="object"/>-->
                 <sheet>
@@ -29,17 +32,52 @@
         <field name ="model">garage.parts</field>
         <field name  = "arch" type="xml">
             <tree>
+<!--                ex 5 q4. Make a tree view and make sure that the records can not be created or deleted-->
+<!--            <tree create="false" delete="false">-->
                 <field name="id"/>
+                <field name = "image"/>
                 <field name ="name"/>
                 <field name= "qty"/>
             </tree>
         </field>
     </record>
+<!--Create a kanban view to display only fields of a record.-->
+<!--Add an image on the kanban view.-->
+    <record id = "view_parts_kanban" model = "ir.ui.view">
+        <field name = "name">garage.parts.kanban</field>
+        <field name = "model">garage.parts</field>
+        <field name="arch" type="xml">
+            <kanban string = "parts kanban" class ="o_res_partner_kanban">
+                <field name ="id"/>
+                <field name = "name"/>
+
+                <templates>
+                    <t t-name = "kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <img alt = "Avatar" t-att-src="kanban_image('garage.parts','image',record.id.raw_value)" class="o_image_90_max" height="90" width = "90"/>
+
+                        </div>
+                        <ul>
+                            <li>
+                                parts name <field name = "name"/>
+
+                            </li>                            <li>
+                               QTY:- <field name="qty"/>
+
+                            </li>
+                        </ul>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
 
     <record id="action_parts" model="ir.actions.act_window">
         <field name = "name">parts</field>
         <field name = "res_model">garage.parts</field>
-        <field name= "view_mode">tree,form</field>
+        <field name= "view_mode">kanban,tree,form</field>
     </record>
     <menuitem id="menu_parts"  action="action_parts" parent="menu_more"/>
 </odoo>
