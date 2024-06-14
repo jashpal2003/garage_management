@@ -182,7 +182,15 @@
             </tree>
         </field>
     </record>
+    <record id="action_maintenance" model="ir.actions.act_window">
+        <field name="name">MaintenanceRecord</field>
+        <field name="res_model">garage.maintenance</field>
+        <field name="view_mode">tree,form</field>
+<!--        <field name ="domain">[('car_id','=',active_id)]</field>-->
+        <field name = "context">{'search_default_car_id':42}</field>
+        <!--        When an action is called need to have a default group by on your state field.-->
 
+    </record>
 
     <record id="view_customer_kanban" model="ir.ui.view">
         <field name="name">garage.customer.kanban</field>
@@ -245,6 +253,10 @@
                                 <a role="menuitem" type="object" name="browse_record" class="dropdown-item">Browse</a>
                                 <div role="separator" class="dropdown-divider"/>
                                 <a role="menuitem" type="object" name="open_rec" class="dropdown-item">One2Many Records</a>
+                                <div role="separator" class="dropdown-divider"/>
+                                <a role="menuitem" type="action" name="%(action_services)d" class="dropdown-item">One Records</a>
+
+                                <a role="menuitem" type="action" name="%(action_maintenance)d" class="dropdown-item">One Records o2m</a>
                                 <ul class="oe_kanban_colorpicker" data-field="color"/>
                             </div>
 
@@ -463,13 +475,13 @@
 <!--        <field name="context">{}</field>-->
 
     </record>
-    <record id="action_maintenance" model="ir.actions.act_window">
-        <field name="name">MaintenanceRecord</field>
-        <field name="res_model">garage.maintenance</field>
-        <field name="view_mode">tree,form</field>
-        <!--        When an action is called need to have a default group by on your state field.-->
+<!--    <record id="action_maintenance" model="ir.actions.act_window">-->
+<!--        <field name="name">MaintenanceRecord</field>-->
+<!--        <field name="res_model">garage.maintenance</field>-->
+<!--        <field name="view_mode">tree,form</field>-->
+<!--        &lt;!&ndash;        When an action is called need to have a default group by on your state field.&ndash;&gt;-->
 
-    </record>
+<!--    </record>-->
 
     <!--Now on the action where you have put domain we want the field of the domain to-->
     <!--be assigned by default but only when the view is opened from that action.-->
