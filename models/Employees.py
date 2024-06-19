@@ -10,7 +10,7 @@ class Employees(models.Model):
 
     name = fields.Char('Name')
 
-    department_name = fields.Many2one('garage.department','select department')
+    department_id = fields.Many2one('garage.department','select department')
     parent_id = fields.Many2one('garage.employee','head of department')
     child_id = fields.One2many('garage.employee','parent_id','employee')
 
