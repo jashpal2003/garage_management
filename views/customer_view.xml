@@ -24,7 +24,7 @@
                 <!--                        <field name = "state" widget = "statusbar" options = "{'clickable':1" statusbar_visible = "applied,joined,left"/>-->
                 <sheet>
                     <div class="oe_title">
-<!--                        Add an inline stylesheet on the form-->
+                        <!--                        Add an inline stylesheet on the form-->
                         <h1>
                             <field name="reg_no" readonly="1" style="color:blue;"/>
                         </h1>
@@ -32,12 +32,12 @@
 
                     <widget name="web_ribbon" title="Active" bg_color="bg-danger"
                             attrs="{'invisible':[('active','=',True)]}"/>
-<!--                    <widget name="web_ribbon" title="Archived" bg_color="bg-success"-->
-<!--                            attrs="{'invisible':[('active','=',False)]}"/>-->
+                    <!--                    <widget name="web_ribbon" title="Archived" bg_color="bg-success"-->
+                    <!--                            attrs="{'invisible':[('active','=',False)]}"/>-->
 
-<!--                    12. On your form view Add a ribbon with green color for the records which are in a-->
-<!--specific state.-->  
-                    <widget name="web_ribbon" title="grren color" color="green"
+                    <!--                    12. On your form view Add a ribbon with green color for the records which are in a-->
+                    <!--specific state.-->
+                    <widget name="web_ribbon" title="geren color" color="green"
                             attrs="{'invisible':[('state','!=','applied')]}"/>
                     <div class="row">
                         <div class="col col-md-6">
@@ -186,91 +186,60 @@
         <field name="name">MaintenanceRecord</field>
         <field name="res_model">garage.maintenance</field>
         <field name="view_mode">tree,form</field>
-<!--        <field name ="domain">[('car_id','=',active_id)]</field>-->
-        <field name = "context">{'search_default_car_id':42}</field>
+        <field name="domain">[('car_id','=',active_id)]</field>
+        <!--        <field name = "context">{'search_default_car_id ':42}</field>-->
         <!--        When an action is called need to have a default group by on your state field.-->
 
     </record>
-
-    <record id="view_customer_kanban" model="ir.ui.view">
+<record id="view_customer_kanban" model="ir.ui.view">
         <field name="name">garage.customer.kanban</field>
         <field name="model">garage.customer</field>
         <field name="arch" type="xml">
-            <kanban string="car Kanban" class="o_res_partner_kanban">
+            <kanban string="Car Kanban" class="o_res_partner_kanban">
                 <field name="id"/>
-                <!--                    <field name ="name"/>-->
                 <field name="age"/>
                 <field name="gender"/>
                 <field name="color"/>
-                <!--                    <field name ="photo"/>-->
                 <templates>
                     <t t-name="kanban-box">
-<!--                        29. Add a color index field on a model and user color picker widget. Also display the-->
-<!--color on the kanban view. Add a color picker on the kanban view to choose the-->
-<!--color-->
                         <div t-attf-class="#{!selection_mode ? kanban_color(record.color.raw_value) : ''} oe_kanban_card oe_kanban_color oe_kanban_global_click">
-
                             <div class="o_kanban_image">
-
-
-                            <img t-att-src="kanban_image('garage.customer','photo',record.id.raw_value)"
-                                 height="64" width="64" alt =""/>
-                                </div>
-
-
-                        <ul>
-                            <li>
-                                Name:-
-                                <field name="name"/>
-                            </li>
-                            <li>
-                                Age :-
-                                <field name="age"/>
-                            </li>
-                            <li>
-                                Gender :-
-                                <field name="gender"/>
-                            </li>
-
-
-                        </ul>
-                        <div class="o_dropdown_kanban o_dropdown">
+                                <img t-att-src="kanban_image('garage.customer','photo',record.id.raw_value)"
+                                     height="64" width="64" alt=""/>
+                            </div>
+                            <ul>
+                                <li>Name: <field name="name"/></li>
+                                <li>Age: <field name="age"/></li>
+                                <li>Gender: <field name="gender"/></li>
+                            </ul>
+                            <div class="o_dropdown_kanban o_dropdown">
                                 <a class="dropdown-toggle o-no-caret btn" role="button" data-toggle="dropdown" data-display="static" href="#" aria-label="Dropdown menu" title="Dropdown menu">
                                     <span class="fa fa-ellipsis-v"/>
                                 </a>
-                            <div class="dropdown-menu" role="menu">
-<!--                                30. Add a dropdown on the kanban view. This should open the current record in edit-->
-<!--mode.-->
-<!--31. Add a dropdown on the kanban view. This should open the current record in open-->
-<!--mode.-->
-<!--www.skyscendbs.com 3-->
-<!--32. Add a dropdown on the kanban view. This should delete the current record.-->
-                                <a role = "menuitem" type = "open" class="dropdown-item">Open</a>
-                                <t t-if="widget.editable"><a role = "menuitem" type = "edit" class="dropdown-item">Edit</a> </t>
-                                <t t-if="widget.deletable"><a role = "menuitem" type = "delete" class="dropdown-item">Delete</a> </t>
-<!--                                <t t-foreach="record.maintenance_ids.raw_value" t-as="room"></t>-->
-                                <div role="separator" class="dropdown-divider"/>
-                                <a role="menuitem" type="object" name="browse_record" class="dropdown-item">Browse</a>
-                                <div role="separator" class="dropdown-divider"/>
-                                <a role="menuitem" type="object" name="open_rec" class="dropdown-item">One2Many Records</a>
-                                <div role="separator" class="dropdown-divider"/>
-                                <a role="menuitem" type="action" name="%(action_services)d" class="dropdown-item">One Records</a>
-
-                                <a role="menuitem" type="action" name="%(action_maintenance)d" class="dropdown-item">One Records o2m</a>
-                                <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                <div class="dropdown-menu" role="menu">
+                                    <a role="menuitem" type="open" class="dropdown-item">Open</a>
+                                    <t t-if="widget.editable">
+                                        <a role="menuitem" type="edit" class="dropdown-item">Edit</a>
+                                    </t>
+                                    <t t-if="widget.deletable">
+                                        <a role="menuitem" type="delete" class="dropdown-item">Delete</a>
+                                    </t>
+                                    <div role="separator" class="dropdown-divider"/>
+                                    <a role="menuitem" type="object" name="browse_record" class="dropdown-item">Browse</a>
+                                    <div role="separator" class="dropdown-divider"/>
+                                    <a role="menuitem" type="object" name="open_rec" class="dropdown-item">One2Many Records</a>
+                                    <div role="separator" class="dropdown-divider"/>
+                                    <a role="menuitem" type="action" name="%(action_maintenance)d" class="dropdown-item">One Records o2m</a>
+                                    <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                </div>
                             </div>
-
                         </div>
-                        </div>
-
                     </t>
                 </templates>
-
-
             </kanban>
         </field>
-
     </record>
+
 
     <record id="view_customer_tree" model="ir.ui.view">
         <field name="name">view.customer.tree</field>
@@ -278,9 +247,9 @@
         <field name="arch" type="xml">
             <!--                ex 5 q5. Add a tree view and set a default order on a date field.-->
 
-<!--            . Add 5 different colros on the tree view. Depending on state put 4 colors. 5th Color-->
-<!--would be red and this would be only for the records which are archived or-->
-<!--deactivated.-->
+            <!--            . Add 5 different colros on the tree view. Depending on state put 4 colors. 5th Color-->
+            <!--would be red and this would be only for the records which are archived or-->
+            <!--deactivated.-->
             <tree default_order='birthdate'
                   decoration-bf="not state"
 
@@ -292,11 +261,11 @@
                   decoration-muted="state=='left'"
                   decoration-it="active==False"
             >
-<!--                . Create a tree view and add few fields which can be hidden or shown dynamically.-->
-<!--Add atleast 4 fields which are hidden and 4 fields which are displayed but can be-->
-<!--hidden.-->
+                <!--                . Create a tree view and add few fields which can be hidden or shown dynamically.-->
+                <!--Add atleast 4 fields which are hidden and 4 fields which are displayed but can be-->
+                <!--hidden.-->
                 <field name="reg_no" optional="hide"/>
-                <field name ="state"/>
+                <field name="state"/>
                 <field name="sequence" widget="handle" optional="hide"/>
                 <field name="name" optional="hide"/>
                 <field name="age" optional="hide"/>
@@ -316,27 +285,24 @@
         </field>
     </record>
 
-<!--15. Create a calendar view where the record will be displayed only on a single day-->
-<!--for month mode on calendar view-->
-<!---->
+    <!--15. Create a calendar view where the record will be displayed only on a single day-->
+    <!--for month mode on calendar view-->
+    <!---->
 
-<!--Create internal views form and tree for a Many2one field.-->
+    <!--Create internal views form and tree for a Many2one field.-->
     <record id="view_customer_gender_tree" model="ir.ui.view">
-        <field name = "name">view.customer.gender.tree</field>
-        <field name = "model">garage.customer</field>
-        <field name ="arch" type="xml">
+        <field name="name">view.customer.gender.tree</field>
+        <field name="model">garage.customer</field>
+        <field name="arch" type="xml">
             <tree>
-                <field name ="sequence" widget = "handle"/>
-                <field name = "name"/>
-                <field name = "age"/>
-                <field name = "active" widget="boolean_toggle"/>
-                <field name = "birthdate"/>
-                <field name = "email"/>
-                <field name = "company_id" options="{'color_field':'color'}" />
-                <field name = "maintenance_ids"/>
-
-
-
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="age"/>
+                <field name="active" widget="boolean_toggle"/>
+                <field name="birthdate"/>
+                <field name="email"/>
+                <field name="company_id" options="{'color_field':'color'}"/>
+                <field name="maintenance_ids"/>
 
 
             </tree>
@@ -344,48 +310,39 @@
     </record>
 
 
-
-
-
-
-
-
-
-
-    <record id = "view_customer_calendar" model="ir.ui.view">
+    <record id="view_customer_calendar" model="ir.ui.view">
         <field name="name">view.customer.calendar</field>
-        <field name ="model">garage.customer</field>
-        <field name = "arch"  type="xml">
-<!--            <calendar date_start = "birthdate" mode = "month" color ="gender">-->
-<!--            16. Create a calendar view where the record can be displayed on multiple days for-->
-<!--month mode on calendar view.-->
-<!--            <calendar date_start ="vehicle_entry" date_stop = "vehicle_exit" mode = "month">-->
-<!--            17. Create a calendar view where the record will be dsiplayed for multiple hours on a-->
-<!--day mode of calendar view.-->
-            <calendar date_start ="vehicle_entry" date_stop = "vehicle_exit" mode = "day">
-                <field name ="name"/>
+        <field name="model">garage.customer</field>
+        <field name="arch" type="xml">
+            <!--            <calendar date_start = "birthdate" mode = "month" color ="gender">-->
+            <!--            16. Create a calendar view where the record can be displayed on multiple days for-->
+            <!--month mode on calendar view.-->
+            <!--            <calendar date_start ="vehicle_entry" date_stop = "vehicle_exit" mode = "month">-->
+            <!--            17. Create a calendar view where the record will be dsiplayed for multiple hours on a-->
+            <!--day mode of calendar view.-->
+            <calendar date_start="vehicle_entry" date_stop="vehicle_exit" mode="day">
+                <field name="name"/>
             </calendar>
         </field>
     </record>
 
 
+    <!--Create a graph view which will be a bar chart with one measure.-->
+    <record id="view_customer_graph" model="ir.ui.view">
+        <field name="name">view.customer.graph</field>
+        <field name="model">garage.customer</field>
+        <field name="arch" type="xml">
+            <!--            20. Create a graph view which will be a bar chart with multiple cols and not stacked.-->
+            <!--21. Create a graph view which will be a bar chart with multiple cols and stacked.-->
 
-<!--Create a graph view which will be a bar chart with one measure.-->
-    <record id = "view_customer_graph" model="ir.ui.view">
-        <field name ="name">view.customer.graph</field>
-        <field name = "model">garage.customer</field>
-        <field name ="arch"  type ="xml">
-<!--            20. Create a graph view which will be a bar chart with multiple cols and not stacked.-->
-<!--21. Create a graph view which will be a bar chart with multiple cols and stacked.-->
-
-<!--            <graph type ="bar" stacked ="1">-->
-<!--            Create a graph view which will be a line chart.-->
-<!--            <graph type ="line">-->
-<!--            23. Create a graph view which will be a pie chart.-->
-            <graph type ="pie">
+            <!--            <graph type ="bar" stacked ="1">-->
+            <!--            Create a graph view which will be a line chart.-->
+            <!--            <graph type ="line">-->
+            <!--            23. Create a graph view which will be a pie chart.-->
+            <graph type="pie">
                 <field name="vehicle_type" type="row"/>
-                <field name="name" type="name" />
-                <field name="id"  operator="count" string="Record Count"/>
+                <field name="name" type="name"/>
+                <field name="id" operator="count" string="Record Count"/>
 
                 <field name="mileage" string="Average Mileage" type="measure"/>
 
@@ -393,25 +350,25 @@
         </field>
     </record>
 
-<!--24. Create a pivot view with single row and single col but multiple measures.-->
+    <!--24. Create a pivot view with single row and single col but multiple measures.-->
 
-<!--    Create a pivot view where there is a row or col with a date field which displays-->
-<!--the quarter of the date.-->
-<!--26. Create a pivot view where there is a row or col with a date field which displays-->
-<!--the month of the date along with quarter.-->
+    <!--    Create a pivot view where there is a row or col with a date field which displays-->
+    <!--the quarter of the date.-->
+    <!--26. Create a pivot view where there is a row or col with a date field which displays-->
+    <!--the month of the date along with quarter.-->
     <record id="view_digonose_pivot" model="ir.ui.view">
-        <field name = "name">view.customer.pivot</field>
-        <field name ="model">garage.customer</field>
+        <field name="name">view.customer.pivot</field>
+        <field name="model">garage.customer</field>
         <field name="arch" type="xml">
             <pivot>
                 <field name="birthdate" type="row" interval="quarter"/>
-                <field name ="gender" type="row"/>
-                <field name ="vehicle_entry" type="row"/>
-                <field name ="vehicle_entry" type="row"/>
+                <field name="gender" type="row"/>
+                <field name="vehicle_entry" type="row"/>
+                <field name="vehicle_entry" type="row"/>
                 <field name="company_id" type="col"/>
                 <field name="age" type="measure"/>
                 <field name="mileage" type="measure"/>
-                <field name ="horse_power" type="measure"/>
+                <field name="horse_power" type="measure"/>
 
             </pivot>
         </field>
@@ -470,18 +427,18 @@
         <field name="res_model">garage.customer</field>
         <field name="view_mode">kanban,calendar,tree,form,graph,pivot</field>
         <!--        When an action is called need to have a default group by on your state field.-->
-<!--Link the same views to another action without using context-->
-<!--        <field name="context">{'search_default_grp_by_gender':1}</field>-->
-<!--        <field name="context">{}</field>-->
+        <!--Link the same views to another action without using context-->
+        <!--        <field name="context">{'search_default_grp_by_gender':1}</field>-->
+        <!--        <field name="context">{}</field>-->
 
     </record>
-<!--    <record id="action_maintenance" model="ir.actions.act_window">-->
-<!--        <field name="name">MaintenanceRecord</field>-->
-<!--        <field name="res_model">garage.maintenance</field>-->
-<!--        <field name="view_mode">tree,form</field>-->
-<!--        &lt;!&ndash;        When an action is called need to have a default group by on your state field.&ndash;&gt;-->
-
-<!--    </record>-->
+    <!--    <record id="action_maintenance" model="ir.actions.act_window">-->
+    <!--        <field name="name">MaintenanceRecord</field>-->
+    <!--        <field name="res_model">garage.maintenance</field>-->
+    <!--        <field name="view_mode">tree,form</field>-->
+    <!--        &lt;!&ndash;        When an action is called need to have a default group by on your state field.&ndash;&gt;-->
+    <!--&lt;!&ndash;&ndash;&gt;-->
+    <!--    </record>-->
 
     <!--Now on the action where you have put domain we want the field of the domain to-->
     <!--be assigned by default but only when the view is opened from that action.-->
