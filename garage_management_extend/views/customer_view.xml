@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id = "view_customer_form_inherit" model = "ir.ui.view">
+        <field name = "name">view.customer.form.inherit</field>
+        <field name = "model">garage.customer</field>
+        <field name="inherit_id" ref ="garage_management.view_customer_form"/>
+        <field name ="arch" type="xml">
+            <xpath expr="//field[@name='howufind']" position ="after">
+                <field  name="customer_work"/>
+            </xpath>
+<!--            <xpath expr="//field[@name='howufind']" position ="after">-->
+<!--                <field  name="customer_earning"/>-->
+<!--            </xpath>-->
+        </field>
+    </record>
+</odoo>

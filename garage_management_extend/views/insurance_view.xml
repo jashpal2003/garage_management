@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id = "view_insurance-form" model = "ir.ui.view">
+        <field name = "name">view.insurance.form</field>
+        <field name = "model">garage.insurance</field>
+        <field name="arch" type = "xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="accident_description"/>
+                        <field name = "accident_time"/>
+                        <field name="insurance"/>
+                        <field name ="service_ids"/>
+                        <field name = "parts_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_insurance_tree"  model = "ir.ui.view">
+        <field name = "name">view.insurance.tree</field>
+        <field name="model">garage.insurance</field>
+        <field name = "arch"  type  = "xml">
+                <tree>
+                    <field name="accident_description"/>
+<!--                    <field name = "accident_date"/>-->
+<!--                    <field name = "insurance_id"/>-->
+                    <field name ="service_ids"/>
+<!--                    <field name = "parts_id"/>-->
+                </tree>
+        </field>
+    </record>
+
+    <record id = "action_insurance" model="ir.actions.act_window">
+        <field name="name">insurance</field>
+        <field name="res_model">garage.insurance</field>
+        <field name = "view_mode">tree,form</field>
+
+    </record>
+
+
+    <menuitem id = "menu_insurance" action="action_insurance" parent="garage_management.menu_garage"/>
+    
+
+
+
+
+
+</odoo>
