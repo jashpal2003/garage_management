@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_garage_customer_insurance,access.garage.customer.insurance,garage_management.model_garage_customer,group_garage_insurance,1,1,1,1
-garage_management.access_garage_customer_user,access.garage.customer.user,garage_management.model_garage_customer,garage_management.group_garage_user,1,1,1,1
-access_garage_insurance_user,access.garage.insurance.user,model_garage_insurance,garage_management.group_garage_user,1,1,1,1
